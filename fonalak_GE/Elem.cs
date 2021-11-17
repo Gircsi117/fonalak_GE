@@ -22,5 +22,10 @@ namespace fonalak_GE
             this.irany = irany;
             this.kepszam = sorszam;
         }
+
+        private void forgat()
+        {
+
+        }
     }
 }

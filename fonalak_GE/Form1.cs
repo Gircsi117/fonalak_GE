@@ -24,6 +24,7 @@ namespace fonalak_GE
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            elemgeneral();
             alap_general();
         }
 
@@ -123,7 +124,7 @@ namespace fonalak_GE
                     pn.BorderStyle = BorderStyle.FixedSingle;
                     alapPANEL.Controls.Add(pn);
                     pn.Location = new Point(x, y);
-                    pn.Image = kepekIMAGELIST.Images[kepszam];
+                    //pn.Image = kepekIMAGELIST.Images[kepszam];
                     pn.SizeMode = PictureBoxSizeMode.Zoom;
 
                     tabla[i, j] = pn;
@@ -134,7 +135,7 @@ namespace fonalak_GE
                 x = 12;
                 y += szeles;
             }
-            
+            kepekberak();
         }
 
         private void kepekberak()
