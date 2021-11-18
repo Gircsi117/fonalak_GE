@@ -14,6 +14,9 @@ namespace fonalak_GE
     {
         static List<Elem> adatok = new List<Elem>() { };
         static PictureBox[,] tabla = new PictureBox[3,3];
+        static bool mehete = true;
+
+        static Elem[,] megoldas = new Elem[3, 3];
 
         public Form1()
         {
@@ -124,7 +127,6 @@ namespace fonalak_GE
                     pn.BorderStyle = BorderStyle.FixedSingle;
                     alapPANEL.Controls.Add(pn);
                     pn.Location = new Point(x, y);
-                    //pn.Image = kepekIMAGELIST.Images[kepszam];
                     pn.SizeMode = PictureBoxSizeMode.Zoom;
 
                     tabla[i, j] = pn;
@@ -148,9 +150,110 @@ namespace fonalak_GE
                 {
                     tabla[i, j].Image = kepekIMAGELIST.Images[adatok[sorszam].Kepszam];
 
+                    for (int k = 0; k < adatok[sorszam].Irany; k++)
+                    {
+                        tabla[i, j].Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    }
                     sorszam++;        
                 }
             }
+
+            mehete = false;
+        }
+
+        private void rekurzio(int kezd_hely, List<Elem> elemek)
+        {
+            int sor = kezd_hely / 3;
+            int oszlop = kezd_hely % 3;
+
+            if (mehete)
+            {
+                elemek = kivalszt(elemek);
+
+                for (int i = 0; i < elemek.Count; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        megoldas[sor, oszlop] = elemek[i];
+                        if (tabla_vizsgal())
+                        {
+                            if (kezd_hely == 8)
+                            {
+                                kepekberak();
+                                MessageBox.Show("Megoldás sikeresen megtalálva!!!!444!!!44!");
+                            }
+                            else
+                            {
+                                rekurzio(kezd_hely + 1, elemek);
+                            }
+                        }
+                        elemek[i].forgat();
+                    }
+                }
+            }
+        }
+
+        private List<Elem> kivalszt(List<Elem> lista)
+        {
+            List<Elem> kivalasztott = new List<Elem>() { };
+
+            for (int i = 0; i < lista.Count; i++)
+            {
+                kivalasztott.Add(lista[i]);
+            }
+
+            return kivalasztott;
+        }
+
+        private bool tabla_vizsgal()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (megoldas[i, j] != null)
+                    {
+                        if (i + 1 < 3 && megoldas[i + 1, j] != null)
+                        {
+                            if (megoldas[i, j].oldal_visszad("also") != megoldas[i + 1, j].oldal_visszad("felso"))
+                            {
+                                return false;
+                            }
+                        }
+
+                        if (i - 1 > -1 && megoldas[i - 1, j] != null)
+                        {
+                            if (megoldas[i, j].oldal_visszad("felso") != megoldas[i - 1, j].oldal_visszad("also"))
+                            {
+                                return false;
+                            }
+                        }
+
+                        if (j + 1 < 3 && megoldas[i, j + 1] != null)
+                        {
+                            if (megoldas[i, j].oldal_visszad("jobb") != megoldas[i, j + 1].oldal_visszad("bal"))
+                            {
+                                return false;
+                            }
+                        }
+
+                        if (j - 1 > -1 && megoldas[i, j - 1] != null)
+                        {
+                            if (megoldas[i, j].oldal_visszad("bal") != megoldas[i, j - 1].oldal_visszad("jobb"))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        private void kirakBTN_Click(object sender, EventArgs e)
+        {
+            mehete = true;
+            rekurzio(0, adatok);
         }
     }
 }

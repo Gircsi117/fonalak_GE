@@ -64,6 +64,7 @@ namespace fonalak_GE
             this.kirakBTN.TabIndex = 2;
             this.kirakBTN.Text = "Kirak";
             this.kirakBTN.UseVisualStyleBackColor = true;
+            this.kirakBTN.Click += new System.EventHandler(this.kirakBTN_Click);
             // 
             // kepekIMAGELIST
             // 
