@@ -29,16 +29,6 @@ namespace fonalak_GE
             this.MaximizeBox = false;
             elemgeneral();
             alap_general();
-            adatok[0].forgat();
-            adatok[0].forgat();
-            adatok[0].forgat();
-
-            adatok[1].forgat();
-            adatok[1].forgat();
-
-            adatok[5].forgat();
-            adatok[6].forgat();
-            kepekberak(false);
         }
 
         //piros-1, kék-2, zöld-3, sárga-4
@@ -279,6 +269,7 @@ namespace fonalak_GE
 
         private void kirakBTN_Click(object sender, EventArgs e)
         {
+            szamlaloLBL.Text = "0";
             mehete = true;
             rekurzio(0, adatok);
         }
