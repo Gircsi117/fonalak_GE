@@ -29,6 +29,16 @@ namespace fonalak_GE
             this.MaximizeBox = false;
             elemgeneral();
             alap_general();
+            adatok[0].forgat();
+            adatok[0].forgat();
+            adatok[0].forgat();
+
+            adatok[1].forgat();
+            adatok[1].forgat();
+
+            adatok[5].forgat();
+            adatok[6].forgat();
+            kepekberak(false);
         }
 
         //piros-1, kék-2, zöld-3, sárga-4
@@ -137,10 +147,10 @@ namespace fonalak_GE
                 x = 12;
                 y += szeles;
             }
-            kepekberak();
+            kepekberak(false);
         }
 
-        private void kepekberak()
+        private void kepekberak(bool vege)
         {
             int sorszam = 0;
 
@@ -148,13 +158,25 @@ namespace fonalak_GE
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    tabla[i, j].Image = kepekIMAGELIST.Images[adatok[sorszam].Kepszam];
-
-                    for (int k = 0; k < adatok[sorszam].Irany; k++)
+                    if (!vege)
                     {
-                        tabla[i, j].Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        tabla[i, j].Image = kepekIMAGELIST.Images[adatok[sorszam].Kepszam];
+
+                        for (int k = 0; k < adatok[sorszam].Irany; k++)
+                        {
+                            tabla[i, j].Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        }
+                        sorszam++;
                     }
-                    sorszam++;        
+                    else
+                    {
+                        tabla[i, j].Image = kepekIMAGELIST.Images[megoldas[i, j].Kepszam];
+
+                        for (int k = 0; k < megoldas[i, j].Irany; k++)
+                        {
+                            tabla[i, j].Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        }
+                    }
                 }
             }
 
@@ -174,22 +196,27 @@ namespace fonalak_GE
                 {
                     for (int j = 0; j < 4; j++)
                     {
+                        szamlaloLBL.Text = (Convert.ToInt32(szamlaloLBL.Text) + 1).ToString();
                         megoldas[sor, oszlop] = elemek[i];
                         if (tabla_vizsgal())
                         {
                             if (kezd_hely == 8)
                             {
-                                kepekberak();
+                                kepekberak(true);
                                 MessageBox.Show("Megoldás sikeresen megtalálva!!!!444!!!44!");
                             }
                             else
                             {
-                                rekurzio(kezd_hely + 1, elemek);
+                                List<Elem> tovabb = kivalszt(elemek);
+                                tovabb.Remove(elemek[i]);
+                                rekurzio(kezd_hely + 1, kivalszt(tovabb));
                             }
                         }
                         elemek[i].forgat();
                     }
+                    megoldas[sor, oszlop] = null;
                 }
+                megoldas[sor, oszlop] = null;
             }
         }
 
@@ -254,6 +281,29 @@ namespace fonalak_GE
         {
             mehete = true;
             rekurzio(0, adatok);
+        }
+
+        private void keverBTN_Click(object sender, EventArgs e)
+        {
+            List<Elem> uj = new List<Elem>() { };
+            Random rand = new Random();
+
+            for (int i = 0; i < 9; i++)
+            {
+                int sorszam = rand.Next(0, adatok.Count);
+                uj.Add(adatok[sorszam]);
+                adatok.Remove(adatok[sorszam]);
+
+                int db = rand.Next(0, 4);
+
+                for (int j = 0; j < db; j++)
+                {
+                    uj[uj.Count - 1].forgat();
+                }
+            }
+
+            adatok = kivalszt(uj);
+            kepekberak(false);
         }
     }
 }

@@ -35,6 +35,7 @@ namespace fonalak_GE
             this.keverBTN = new System.Windows.Forms.Button();
             this.kirakBTN = new System.Windows.Forms.Button();
             this.kepekIMAGELIST = new System.Windows.Forms.ImageList(this.components);
+            this.szamlaloLBL = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // alapPANEL
@@ -54,6 +55,7 @@ namespace fonalak_GE
             this.keverBTN.TabIndex = 1;
             this.keverBTN.Text = "Kever";
             this.keverBTN.UseVisualStyleBackColor = true;
+            this.keverBTN.Click += new System.EventHandler(this.keverBTN_Click);
             // 
             // kirakBTN
             // 
@@ -80,12 +82,24 @@ namespace fonalak_GE
             this.kepekIMAGELIST.Images.SetKeyName(7, "elem_8.jpg");
             this.kepekIMAGELIST.Images.SetKeyName(8, "elem_9.jpg");
             // 
+            // szamlaloLBL
+            // 
+            this.szamlaloLBL.AutoSize = true;
+            this.szamlaloLBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.szamlaloLBL.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.szamlaloLBL.Location = new System.Drawing.Point(94, 573);
+            this.szamlaloLBL.Name = "szamlaloLBL";
+            this.szamlaloLBL.Size = new System.Drawing.Size(24, 25);
+            this.szamlaloLBL.TabIndex = 3;
+            this.szamlaloLBL.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.ClientSize = new System.Drawing.Size(697, 582);
+            this.ClientSize = new System.Drawing.Size(697, 625);
+            this.Controls.Add(this.szamlaloLBL);
             this.Controls.Add(this.kirakBTN);
             this.Controls.Add(this.keverBTN);
             this.Controls.Add(this.alapPANEL);
@@ -94,6 +108,7 @@ namespace fonalak_GE
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -103,6 +118,7 @@ namespace fonalak_GE
         private System.Windows.Forms.Button keverBTN;
         private System.Windows.Forms.Button kirakBTN;
         private System.Windows.Forms.ImageList kepekIMAGELIST;
+        private System.Windows.Forms.Label szamlaloLBL;
     }
 }
 
