@@ -193,7 +193,7 @@ namespace fonalak_GE
                             if (kezd_hely == 8)
                             {
                                 kepekberak(true);
-                                MessageBox.Show("Megoldás sikeresen megtalálva!!!!444!!!44!");
+                                //MessageBox.Show("Megoldás sikeresen megtalálva!!!!444!!!44!");
                             }
                             else
                             {
