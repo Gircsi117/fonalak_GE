@@ -12,6 +12,8 @@ namespace fonalak_GE
 {
     public partial class Form1 : Form
     {
+        //GitHub:https://github.com/Gircsi117/fonalak_GE
+
         static List<Elem> adatok = new List<Elem>() { };
         static PictureBox[,] tabla = new PictureBox[3,3];
         static bool mehete = true;
